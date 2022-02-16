@@ -2,17 +2,43 @@ const { response } = require('express');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
+const usuario = require('../models/usuario');
 
 
 const getUsuarios = async (req, res) => {
-    
-    const usuarios = await Usuario.find({},'nombre email role google');
 
-    res.status(400).json({
+    const desde =Number(req.query.desde) || 0;
+    
+    
+    // const usuarios = await Usuario
+    //     .find({}, 'nombre email role google')
+    //     .skip(desde)
+    //     .limit(5);
+    
+    // const total = await Usuario.count();
+
+    // res.json({
+    //     ok: true,
+    //     usuarios,
+    //     total
+    // })
+
+    const [usuarios, total] = await Promise.all([
+        Usuario
+            .find({}, 'nombre email role google img')
+            .skip(desde)
+            .limit(20),
+        
+        usuario.countDocuments()
+    ]);
+
+    res.json({
         ok: true,
         usuarios,
-        uid:req.uid
+        total
     })
+
+    
 
 }
 
