@@ -16,7 +16,13 @@ app.use(express.json());
 dbConnection();
 
 
-console.log(process.env);
+//Directorio publico
+app.use(express.static('public'));
+
+
+
+
+ 
 
 
 //Rutas
