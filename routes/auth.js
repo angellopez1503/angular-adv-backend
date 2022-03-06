@@ -20,7 +20,7 @@ login
 
 router.post('/google', [
     
-    check('token', 'El token de google es obligatorio').not().isEmpty(),
+    check('token', 'El token de google es obligatorio').notEmpty(),
     validarCampos
 ],
     googleSingIn
