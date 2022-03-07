@@ -93,8 +93,7 @@ const validarAdminRoleOMismoUsuario = async (req, res, next) => {
                 msg: 'No tiene privilegios para hacer eso'
             });
         }
-
-        
+       
 
 
     } catch (error) {
